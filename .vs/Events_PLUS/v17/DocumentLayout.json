@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\56805860881\\Desktop\\Event\u002B\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{18D04376-5DA4-46B6-9B39-B7518FA25984}|Events_PLUS.csproj|c:\\users\\56805860881\\desktop\\event\u002B\\context\\events_plus_context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18D04376-5DA4-46B6-9B39-B7518FA25984}|Events_PLUS.csproj|solutionrelative:context\\events_plus_context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Events_PLUS_Context.cs",
+              "DocumentMoniker": "C:\\Users\\56805860881\\Desktop\\Event\u002B\\Context\\Events_PLUS_Context.cs",
+              "RelativeDocumentMoniker": "Context\\Events_PLUS_Context.cs",
+              "ToolTip": "C:\\Users\\56805860881\\Desktop\\Event\u002B\\Context\\Events_PLUS_Context.cs",
+              "RelativeToolTip": "Context\\Events_PLUS_Context.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-20T19:34:51.512Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
