@@ -1,17 +1,18 @@
-﻿using EventPlus_.Domains;
+﻿using EventPlus_.Context;
+using EventPlus_.Domains;
 using Events_PLUS.Domains;
 using Microsoft.EntityFrameworkCore;
 
-namespace EventPlus_.Context
+namespace EventsPlus_.Context
 {
 
-    public class Eventos_Context : DbContext
+    public class Events_PLUS_Context : DbContext
     {
-        public Eventos_Context()
+        public Events_PLUS_Context()
         {
         }
 
-        public Eventos_Context(DbContextOptions<Eventos_Context> options) : base(options)
+        public Events_PLUS_Context(DbContextOptions<Eventos_Context> options) : base(options)
         {
         }
 
@@ -21,13 +22,13 @@ namespace EventPlus_.Context
         public DbSet<PresencasEventos> PresencasEventos { get; set; }
         public DbSet<TiposEventos> TiposEventos { get; set; }
         public DbSet<TiposUsuarios> TiposUsuarios { get; set; }
-        public DbSet<Usuarios> Usuarios { get; set; }
+        public DbSet<Usuarios> Usuario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server = NOTE43-S28\\SQLEXPRESS; Database = EventPlus; User Id = sa; Pwd = Senai@134; TrustServerCertificate=true;");
+                optionsBuilder.UseSqlServer("Server = DESKTOP-0HO9ARA\\SQLEXPRESS; Database = EventPlus; User Id = sa; Pwd = Senai@134; TrustServerCertificate=true;");
             }
         }
 

@@ -1,7 +1,8 @@
-﻿namespace Events_PLUS.Utils
+﻿namespace EventPlus_.Utils
 {
-    public static class Criptografia
+    public class Criptografia
     {
+
         public static string GerarHash(string senha)
         {
             return BCrypt.Net.BCrypt.HashPassword(senha);

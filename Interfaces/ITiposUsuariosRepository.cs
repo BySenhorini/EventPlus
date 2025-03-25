@@ -1,16 +1,18 @@
-﻿using Events_PLUS.Domains;
+﻿
+using Events_PLUS.Domains;
 
-namespace Events_PLUS.Interfaces
+namespace EventPlus_.Interfaces
 {
-        public interface ITiposUsuariosRepository
-        {
-            void Cadastrar(TiposUsuarios novoTipoUsuario);
-            void Deletar(Guid id);
+    public interface ITipoUsuarioRepository
+    {
+        void Cadastrar(TiposUsuarios tipoUsuario);
 
-            List<TiposUsuarios> Listar();
+        List<TiposUsuarios> Listar();
 
-            TiposUsuarios BuscarPorID(Guid id);
+        void Atualizar(Guid id, TiposUsuarios tipoUsuario);
+        void Deletar(Guid id);
 
-            void Atualizar(Guid id, TiposUsuarios tipoUsuario);
-        }
+        TiposUsuarios BuscarPorId(Guid id);
+
     }
+}

@@ -1,41 +1,36 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Events_PLUS.Domains;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-// As DOMAINS servem para criar as tabelas no seu Banco de Dados, cadastrar os tipos de Dados e seus Atributos.
-
-namespace Events_PLUS.Domains
+namespace EventPlus_.Domains
 {
     [Table("ComentarioEvento")]
     public class ComentarioEvento
     {
-        // Foreign Key 
         [Key]
-        public Guid IdComentarioEvento { get; set; }
-
-        [Column(TypeName = "VARCHAR(100)")]
-        [Required(ErrorMessage = "A Descrição do comentário é obrigatória!")]
-        public string? Descricao { get; set; }
+        public Guid ComentarioEventoID { get; set; }
 
         [Column(TypeName = "BIT")]
-        [Required(ErrorMessage = "A Exibição do comentário é obrigatória!")]
         public bool? Exibe { get; set; }
 
-
-        // Referência Tabela Usuário
-
-        [Required(ErrorMessage = "O Nome do usuário é obrigatório!")]
-        public Guid IdUsuario { get; set; }
-
-        [ForeignKey("IdUsuario")]
-        public Usuarios? Usuarios { get; set; }
+        [Column(TypeName = "TEXT")]
+        [Required(ErrorMessage = "Descrição do evento obrigatória!")]
+        public string? Descricao { get; set; }
 
 
-        // Referência Tabela Evento
+        [Required(ErrorMessage = "O usuario é obrigatório")]
+        public Guid UsuarioID { get; set; }
 
-        [Required(ErrorMessage = "O Nome do evento é obrigatório!")]
-        public Guid IdEvento { get; set; }
+        [ForeignKey("UsuarioID")]
+        public Usuarios? Usuario { get; set; }
 
-        [ForeignKey("IdEvento")]
+
+
+        [Required(ErrorMessage = "O evento é obrigatório")]
+        public Guid EventosID { get; set; }
+
+        [ForeignKey("EventosID")]
         public Eventos? Eventos { get; set; }
+
     }
 }

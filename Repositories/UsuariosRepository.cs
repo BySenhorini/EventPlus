@@ -1,29 +1,27 @@
-﻿
-using Projeto_Event_Plus.Utils;
-using Events_PLUS.Interfaces;
-using Events_PLUS.Context;
+﻿using EventPlus_.Context;
+using EventPlus_.Utils;
 using Events_PLUS.Domains;
+using Events_PLUS_.Interfaces;
 
-namespace Projeto_Event_Plus.Repositories
+namespace Events_PLUS_.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly Events_PLUS_Context _context;
-
-        public UsuarioRepository(Events_PLUS_Context context)
+        private readonly Eventos_Context _Context;
+        public UsuarioRepository(Eventos_Context context)
         {
-            _context = context;
+            _Context = context;
         }
 
-        public Usuarios BuscarPorEmailESenha(string Email, string Senha)
+        public Usuarios BuscarPorEmailESenha(string email, string senha)
         {
             try
             {
-                Usuarios usuarioBuscado = _context.Usuarios.FirstOrDefault(u => u.Email == Email)!;
+                Usuarios usuarioBuscado = _Context.Usuarios.FirstOrDefault(u => u.Email == email)!;
 
                 if (usuarioBuscado != null)
                 {
-                    bool confere = Criptografia.CompararHash(Senha, usuarioBuscado.Senha!);
+                    bool confere = Criptografia.CompararHash(senha, usuarioBuscado.Senhas!);
 
                     if (confere)
                     {
@@ -34,16 +32,15 @@ namespace Projeto_Event_Plus.Repositories
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
-        public Usuarios BuscarPorID(Guid id)
+        public Usuarios BuscarPorId(Guid id)
         {
             try
             {
-                Usuarios usuarioBuscado = _context.Usuarios.Find(id)!;
+                Usuarios usuarioBuscado = _Context.Usuarios.Find(id)!;
 
                 if (usuarioBuscado != null)
                 {
@@ -53,7 +50,6 @@ namespace Projeto_Event_Plus.Repositories
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -62,10 +58,10 @@ namespace Projeto_Event_Plus.Repositories
         {
             try
             {
-                novoUsuario.Senha = Criptografia.GerarHash(novoUsuario.Senha!);
 
-                _context.Usuarios.Add(novoUsuario);
-                _context.SaveChanges();
+                _Context.Usuarios.Add(novoUsuario);
+
+                _Context.SaveChanges();
             }
             catch (Exception)
             {

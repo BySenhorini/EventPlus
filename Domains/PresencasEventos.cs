@@ -1,29 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Events_PLUS.Domains;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Events_PLUS.Domains
+namespace EventPlus_.Domains
 {
-    [Table("PresencaEventos")]
+    [Table("PresencasEventos")]
     public class PresencasEventos
     {
-        // Foreign Key
         [Key]
-        public Guid IdPresenca { get; set; }
+        public Guid PresencasEventosID { get; set; }
 
-        // Presença Obrigatória
-        [Column(TypeName = "VARCHAR(50)")]
-        [Required(ErrorMessage = "A presença é obrigatório!")]
-        public string? Presenca { get; set; }
+        [Column(TypeName = "BIT")]
+        public bool? Situacao { get; set; }
 
-        // IdUsuario
-        public Guid IdUsuario { get; set; }
-        [ForeignKey("IdUsuario")]
-        public Usuarios? IdUsuarios { get; set; }
 
-        // IdEvento
-        public Guid IdEvento { get; set; }
+        [Required(ErrorMessage = "O usuario é obrigatório")]
+        public Guid UsuarioID { get; set; }
 
-        [ForeignKey("IdEvento")]
-        public Eventos? Evento { get; set; }
+        [ForeignKey("UsuarioID")]
+        public Usuarios? Usuario { get; set; }
+
+
+        [Required(ErrorMessage = "O evento é obrigatório")]
+        public Guid EventosID { get; set; }
+
+        [ForeignKey("EventosID")]
+        public Eventos? Eventos { get; set; }
     }
 }

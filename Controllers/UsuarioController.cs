@@ -3,8 +3,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Events_PLUS.Domains;
-using Events_PLUS.Interfaces;
 using Projeto_Event_Plus.DTO;
+using Events_PLUS_.Interfaces;
 
 namespace Projeto_Event_Plus.Controllers
 {
@@ -51,7 +51,7 @@ namespace Projeto_Event_Plus.Controllers
         {
             try
             {
-                Usuarios tipoUsuarioBuscado = _usuarioRepository.BuscarPorID(id);
+                Usuarios tipoUsuarioBuscado = _usuarioRepository.BuscarPorId(id);
 
                 return Ok(tipoUsuarioBuscado);
             }

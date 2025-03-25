@@ -2,27 +2,27 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace Events_PLUS.Domains
+namespace EventPlus_.Domains
 {
-    [Table("Instituicoes")]
-    [Index(nameof(CNPJ), IsUnique = true)]
+    [Table("Instituicao")]
+    [Index(nameof(Cnpj), IsUnique = true)]
     public class Instituicoes
     {
-        // Foreign Key
         [Key]
-        public Guid IdInstituicoes { get; set; }
+        public Guid InstituicoesID { get; set; }
 
         [Column(TypeName = "VARCHAR(50)")]
-        [Required(ErrorMessage = "O CNPJ é obrigatório!")]
-        public string? CNPJ { get; set; }
-
+        [Required(ErrorMessage = "O nome da fantasia é obrigatório")]
+        public string? NomeFantasia { get; set; }
 
         [Column(TypeName = "VARCHAR(100)")]
-        [Required(ErrorMessage = "O Endereço é obrigatório!")]
-        public string? Endereço { get; set; }
+        [Required(ErrorMessage = "O endereço é obrigatório")]
+        public string? Endereco { get; set; }
 
-        [Column(TypeName = "VARCHAR(50)")]
-        [Required(ErrorMessage = "O Nome da Fantasia é obrigatório!")]
-        public string? NomeFantasia { get; set; }
+        [Column(TypeName = "VARCHAR(14)")]
+        [Required(ErrorMessage = "A Cnpj é obrigatória")]
+        [StringLength(14)]
+        public string? Cnpj { get; set; }
+
     }
 }

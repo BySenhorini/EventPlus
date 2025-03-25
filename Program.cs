@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Events_PLUS.Domains;
-using Events_PLUS.Interfaces;
-using projeto_event_plus.Repositories;
-using Events_PLUS;
+﻿using Events_PLUS.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +20,8 @@ builder.Services.AddDbContext<Events_Plus_Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Inje��o de depend�ncia dos reposit�rios
-builder.Services.AddScoped<ITiposEventosRepository, TiposEventosRepository>();
-builder.Services.AddScoped<ITiposUsuariosRepository, TiposUsuariosRepository>();
+builder.Services.AddScoped<ITipoEventoRepository, TipoEventoRepository>();
+builder.Services.AddScoped<ITiposUsuariosRepository, TipoUsuarioRepository>();
 
 
 //Adiciona o servi�o de Controllers

@@ -1,4 +1,5 @@
-﻿using Events_PLUS.Domains;
+﻿using EventPlus_.Interfaces;
+using Events_PLUS.Domains;
 using Events_PLUS.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,9 @@ namespace projeto_event_plus.Controllers
     [Produces("application/json")]
     public class TiposUsuariosController : ControllerBase
     {
-        private readonly ITiposUsuariosRepository _tiposUsuariosRepository;
+        private readonly ITipoUsuarioRepository _tiposUsuariosRepository;
 
-        public TiposUsuariosController(ITiposUsuariosRepository tiposUsuariosRepository)
+        public TiposUsuariosController(ITipoUsuarioRepository tiposUsuariosRepository)
         {
             _tiposUsuariosRepository = tiposUsuariosRepository;
         }
@@ -68,7 +69,7 @@ namespace projeto_event_plus.Controllers
         {
             try
             {
-                TiposUsuarios tiposUsuariosBuscado = _tiposUsuariosRepository.BuscarPorID(id);
+                TiposUsuarios tiposUsuariosBuscado = _tiposUsuariosRepository.BuscarPorId(id);
                 return Ok(tiposUsuariosBuscado);
             }
             catch (Exception e)

@@ -186,3 +186,14 @@ C:\Users\56805860881\Desktop\Event_PLUS\obj\Debug\net8.0\Events_PLUS.sourcelink.
 C:\Users\56805860881\Desktop\Event_PLUS\obj\Debug\net8.0\Events_PLUS.dll
 C:\Users\56805860881\Desktop\Event_PLUS\obj\Debug\net8.0\refint\Events_PLUS.dll
 C:\Users\56805860881\Desktop\Event_PLUS\obj\Debug\net8.0\Events_PLUS.pdb
+C:\Users\56805860881\Desktop\EventPlus\obj\Debug\net8.0\Events_PLUS.csproj.AssemblyReference.cache
+C:\Users\56805860881\Desktop\EventPlus\obj\Debug\net8.0\Events_PLUS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\56805860881\Desktop\EventPlus\obj\Debug\net8.0\Events_PLUS.AssemblyInfoInputs.cache
+C:\Users\56805860881\Desktop\EventPlus\obj\Debug\net8.0\Events_PLUS.AssemblyInfo.cs
+C:\Users\56805860881\Desktop\EventPlus\obj\Debug\net8.0\Events_PLUS.csproj.CoreCompileInputs.cache
+C:\Users\56805860881\Desktop\EventPlus\obj\Debug\net8.0\Events_PLUS.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\56805860881\Desktop\EventPlus\obj\Debug\net8.0\Events_PLUS.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\56805860881\Desktop\EventPlus\obj\Debug\net8.0\Events_PLUS.sourcelink.json
+C:\Users\56805860881\Desktop\EventPlus\obj\Debug\net8.0\Events_PLUS.dll
+C:\Users\56805860881\Desktop\EventPlus\obj\Debug\net8.0\refint\Events_PLUS.dll
+C:\Users\56805860881\Desktop\EventPlus\obj\Debug\net8.0\Events_PLUS.pdb

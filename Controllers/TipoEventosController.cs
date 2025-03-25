@@ -1,4 +1,4 @@
-﻿using Events_PLUS.Domains;
+﻿using EventPlus_.Domains;
 using Events_PLUS.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +10,8 @@ namespace Events_PLUS.Controllers
     [Produces("application/json")]
     public class TipoEventoController : ControllerBase
     {
-        private readonly ITiposEventosRepository _tiposEventosRepository;
-        public TipoEventoController(ITiposEventosRepository tiposEventosRepository)
+        private readonly ITipoEventoRepository _tiposEventosRepository;
+        public TipoEventoController(ITipoEventoRepository tiposEventosRepository)
         {
             _tiposEventosRepository = tiposEventosRepository;
         }

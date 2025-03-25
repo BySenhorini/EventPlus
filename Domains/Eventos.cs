@@ -1,41 +1,44 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿//using Events_PLUS.Domains;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Events_PLUS.Domains
+namespace EventPlus_.Domains
 {
     [Table("Eventos")]
     public class Eventos
     {
         [Key]
-        public Guid IdEvento { get; set; }
+        public Guid EventosID { get; set; }
 
-        // Data
-        [Column(TypeName = "DATE")]
-        [Required(ErrorMessage = "A Data é obrigatória!")]
-        public DateTime DataEvento { get; set; }
-
-        // Nome do Evento
-        [Column(TypeName = "VARCHAR(100)")]
-        [Required(ErrorMessage = "O Nome do Evento é obrigatória!")]
+        [Column(TypeName = "VARCHAR(50)")]
+        [Required(ErrorMessage = "Nome do evento é obrigatório!")]
         public string? NomeEvento { get; set; }
 
-        // Descrição
         [Column(TypeName = "TEXT")]
-        [Required(ErrorMessage = "A Descrição é obrigatória!")]
-
+        [Required(ErrorMessage = "Descrição do evento obrigatória!")]
         public string? Descricao { get; set; }
 
-        //--------------------------------------------------------------------------------
+        [Column(TypeName = "DATE")]
+        [Required(ErrorMessage = "A data do evento é obrigatória!")]
+        public DateTime DataEvento { get; set; }
 
 
-        // FK do IdTipoEvento
-        public Guid IdTipoEvento { get; set; }
-        [ForeignKey("IdTipoEvento")]
-        public TiposEventos? TipoEvento { get; set; }
+        [Required(ErrorMessage = "O evento é obrigatório")]
+        public Guid TiposEventosID { get; set; }
 
-        // FK do IdInstituicao
-        public Guid? IdInstituicoes { get; set; }
-        [ForeignKey("IdInstituicoes")]
-        public Instituicoes? Instituicao { get; set; }
+        [ForeignKey("TipoEventoID")]
+        public TiposEventos? TiposEventos { get; set; }
+
+
+        [Required(ErrorMessage = "A instituição é obrigatório")]
+        public Guid InstituicoesID { get; set; }
+
+        [ForeignKey("InstituicaoID")]
+        public Instituicoes? Instituicoes { get; set; }
+
+
+        public PresencasEventos? Presenca { get; set; }
+
+
     }
 }

@@ -1,14 +1,17 @@
-﻿namespace Events_PLUS.Interfaces
+﻿using EventPlus_.Domains;
+
+namespace EventPlus_.Interfaces
 {
-        public interface IComentarioRepository
-        {
-            void Cadastrar(IComentarioRepository comentario);
+    public interface IComentarioEventoRepository
+    {
+        void Cadastrar(ComentarioEvento comentarioEvento);
 
-            void Deletar(Guid id);
+        void Deletar(Guid id);
 
-            List<IComentarioRepository> Listar(Guid id);
+        List<ComentarioEvento> Listar(Guid id);
 
-            IComentarioRepository BuscarPorIdUsuario(Guid idUsuario, Guid idEvento);
-        }
+        ComentarioEvento BuscarPorIdUsuario(Guid UsuarioID, Guid EventosID);
+        List<ComentarioEvento> Listar();
     }
+}
 
