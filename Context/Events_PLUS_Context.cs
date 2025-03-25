@@ -1,35 +1,39 @@
-﻿using EventPlus_.Domains;
-using Events_PLUS.Domains;
+﻿
 using Microsoft.EntityFrameworkCore;
+using EventPlus_.Domains;
 
-namespace EventPlus_.Context
+namespace EventPlus_.Contexts
 {
-
-    public class Eventos_Context : DbContext
+    public class Context : DbContext
     {
-        public Eventos_Context()
+        public Context()
+        {
+        }
+        public Context(DbContextOptions<Context> options)
+            : base(options)
         {
         }
 
-        public Eventos_Context(DbContextOptions<Eventos_Context> options) : base(options)
-        {
-        }
-
-        public DbSet<ComentarioEvento> ComentarioEvento { get; set; }
-        public DbSet<Eventos> Eventos { get; set; }
-        public DbSet<Instituicoes> Instituicoes { get; set; }
-        public DbSet<PresencasEventos> PresencasEventos { get; set; }
-        public DbSet<TiposEventos> TiposEventos { get; set; }
         public DbSet<TiposUsuarios> TiposUsuarios { get; set; }
+
         public DbSet<Usuarios> Usuarios { get; set; }
+
+        public DbSet<TiposEventos> TiposEventos { get; set; }
+        public DbSet<Eventos> Eventos { get; set; }
+
+        public DbSet<ComentariosEventos> ComentarioEvento { get; set; }
+
+        public DbSet<Instituicoes> Instituicoes { get; set; }
+
+        public DbSet<PresencasEventos> PresencasEventos { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server = NOTE43-S28\\SQLEXPRESS; Database = EventPlus; User Id = sa; Pwd = Senai@134; TrustServerCertificate=true;");
+                optionsBuilder.UseSqlServer("Server=NOTE43-S28\\SQLEXPRESS; Database=event; Integrated Security=True; TrustServerCertificate=true;");
             }
         }
-
     }
 }

@@ -1,4 +1,6 @@
-﻿using Events_PLUS.Interfaces;
+﻿using EventPlus_.Interfaces;
+using EventPlus_.Repositories;
+using EventsPlus_.Context;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,13 +18,12 @@ builder.Services // Acessa a cole��o de servi�os da aplica��o (Depende
     });
 
 // Adiciona o contexto do banco de dados (exemplo com SQL Server)
-builder.Services.AddDbContext<Events_Plus_Context>(options =>
+builder.Services.AddDbContext<Events_PLUS_Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Inje��o de depend�ncia dos reposit�rios
-builder.Services.AddScoped<ITipoEventoRepository, TipoEventoRepository>();
-builder.Services.AddScoped<ITiposUsuariosRepository, TipoUsuarioRepository>();
-
+builder.Services.AddScoped<ITiposEventosRepository, TiposEventosRepository>();
+builder.Services.AddScoped<ITiposUsuariosRepository, TiposUsuariosRepository>();
 
 //Adiciona o servi�o de Controllers
 builder.Services.AddControllers();
@@ -32,10 +33,3 @@ var app = builder.Build();
 app.MapControllers();
 
 app.Run();
-
-namespace Events_PLUS
-{
-    class Events_PLUS_Context
-    {
-    }
-}

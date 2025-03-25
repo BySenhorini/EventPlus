@@ -1,20 +1,19 @@
-﻿using EventPlus_.Interfaces;
-using Events_PLUS.Domains;
-using Events_PLUS.Interfaces;
+﻿using EventPlus_.Domains;
+using EventPlus_.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace projeto_event_plus.Controllers
+namespace EventPlus_.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
     public class TiposUsuariosController : ControllerBase
     {
-        private readonly ITipoUsuarioRepository _tiposUsuariosRepository;
+        private readonly ITiposUsuariosRepository _tiposUsuariosRepository;
 
-        public TiposUsuariosController(ITipoUsuarioRepository tiposUsuariosRepository)
+        public TiposUsuariosController(ITiposUsuariosRepository tiposUsuariosRepository)
         {
             _tiposUsuariosRepository = tiposUsuariosRepository;
         }

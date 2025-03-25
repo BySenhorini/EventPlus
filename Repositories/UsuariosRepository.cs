@@ -1,31 +1,45 @@
-﻿using EventPlus_.Context;
+﻿using EventPlus_.Contexts;
+using EventPlus_.Domains;
+using EventPlus_.Interfaces;
 using EventPlus_.Utils;
-using Events_PLUS.Domains;
-using Events_PLUS_.Interfaces;
 
-namespace Events_PLUS_.Repositories
+namespace EventPlus_Repositories
 {
-    public class UsuarioRepository : IUsuarioRepository
+    public class UsuariosRepository : IUsuarioRepository
     {
-        private readonly Eventos_Context _Context;
-        public UsuarioRepository(Eventos_Context context)
+        private readonly Context _context;
+
+        public UsuariosRepository(Context context)
         {
-            _Context = context;
+            _context = context;
         }
 
         public Usuarios BuscarPorEmailESenha(string email, string senha)
         {
             try
             {
-                Usuarios usuarioBuscado = _Context.Usuarios.FirstOrDefault(u => u.Email == email)!;
+                Usuarios usuarioBuscado = _context.Usuarios
+                    .Select(u => new Usuarios
+                    {
+                        IdUsuario = u.IdUsuario,
+                        NomeUsuario = u.NomeUsuario,
+                        Email = u.Email,
+                        Senha = u.Senha,
+
+                        TipoUsuario = new TiposUsuarios
+                        {
+                            IdTipoUsuario = u.IdTipoUsuario,
+                            TituloTipoUsuario = u.TipoUsuario!.TituloTipoUsuario
+                        }
+                    }).FirstOrDefault(u => u.Email == email)!;
 
                 if (usuarioBuscado != null)
                 {
-                    bool confere = Criptografia.CompararHash(senha, usuarioBuscado.Senhas!);
+                    bool confere = Criptografia.CompararHash(senha, usuarioBuscado.Senha!);
 
                     if (confere)
                     {
-                        return usuarioBuscado;
+                        return usuarioBuscado!;
                     }
                 }
                 return null!;
@@ -35,16 +49,32 @@ namespace Events_PLUS_.Repositories
                 throw;
             }
         }
+        
 
         public Usuarios BuscarPorId(Guid id)
         {
             try
             {
-                Usuarios usuarioBuscado = _Context.Usuarios.Find(id)!;
+                Usuarios usuarioBuscado = _context.Usuarios
+                    .Select(u => new Usuarios
+                    {
+                        IdUsuario = u.IdUsuario,
+                        NomeUsuario = u.NomeUsuario,
+                        Email = u.Email,
+                        Senha = u.Senha,
+
+                        TipoUsuario = new TiposUsuarios
+                        {
+                            IdTipoUsuario = u.TipoUsuario!.IdTipoUsuario,
+                            TituloTipoUsuario = u.TipoUsuario!.TituloTipoUsuario
+                        }
+
+                    }).FirstOrDefault(u => u.IdUsuario == id)!;
 
                 if (usuarioBuscado != null)
                 {
                     return usuarioBuscado;
+
                 }
                 return null!;
             }
@@ -54,18 +84,22 @@ namespace Events_PLUS_.Repositories
             }
         }
 
-        public void Cadastrar(Usuarios novoUsuario)
+        public void Cadastrar(Usuarios usuario)
         {
             try
             {
+                usuario.IdUsuario = Guid.NewGuid();
 
-                _Context.Usuarios.Add(novoUsuario);
+                usuario.Senha = Criptografia.GerarHash(usuario.Senha!);
 
-                _Context.SaveChanges();
+
+                _context.Usuarios.Add(usuario);
+
+
+                _context.SaveChanges();
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

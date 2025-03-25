@@ -1,6 +1,4 @@
-﻿using EventPlus_.Context;
-using EventPlus_.Domains;
-using Events_PLUS.Domains;
+﻿using EventPlus_.Domains;
 using Microsoft.EntityFrameworkCore;
 
 namespace EventsPlus_.Context
@@ -12,11 +10,11 @@ namespace EventsPlus_.Context
         {
         }
 
-        public Events_PLUS_Context(DbContextOptions<Eventos_Context> options) : base(options)
+        public Events_PLUS_Context(DbContextOptions<Events_PLUS_Context> options) : base(options)
         {
         }
 
-        public DbSet<ComentarioEvento> ComentarioEvento { get; set; }
+        public DbSet<ComentariosEventos> ComentarioEvento { get; set; }
         public DbSet<Eventos> Eventos { get; set; }
         public DbSet<Instituicoes> Instituicoes { get; set; }
         public DbSet<PresencasEventos> PresencasEventos { get; set; }
@@ -28,7 +26,7 @@ namespace EventsPlus_.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server = DESKTOP-0HO9ARA\\SQLEXPRESS; Database = EventPlus; User Id = sa; Pwd = Senai@134; TrustServerCertificate=true;");
+                optionsBuilder.UseSqlServer("Server = NOTE43-S28\\SQLEXPRESS; Database = EventPlus; User Id = sa; Pwd = Senai@134; TrustServerCertificate=true;");
             }
         }
 

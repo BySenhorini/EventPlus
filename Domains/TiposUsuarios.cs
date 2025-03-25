@@ -1,18 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Events_PLUS.Domains
+namespace EventPlus_.Domains
 {
     [Table("TiposUsuarios")]
     public class TiposUsuarios
     {
-        // Implementando a Foreign KEY TipoUsuarioId
         [Key]
-        public Guid TipoUsuarioId { get; set; }
+        public Guid IdTipoUsuario { get; set; }
 
-        [Column(TypeName = "VARCHAR(50)")]
-        [Required(ErrorMessage = "O titulo de usuario é ")]
+        [Column(TypeName = "VARCHAR(100)")]
+        [Required(ErrorMessage = "Tipo do usuário obrigatório!")]
         public string? TituloTipoUsuario { get; set; }
     }
 }
-

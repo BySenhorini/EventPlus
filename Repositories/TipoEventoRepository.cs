@@ -1,14 +1,15 @@
-﻿using EventPlus_.Context;
+﻿using EventPlus_.Contexts;
 using EventPlus_.Domains;
-using Events_PLUS.Interfaces;
+using EventPlus_.Interfaces;
 
 namespace EventPlus_.Repositories
 {
-    public class TipoEventoRepository : ITipoEventoRepository
+    public class TiposEventosRepository : ITiposEventosRepository
     {
-        private readonly Eventos_Context _context;
 
-        public TipoEventoRepository(Eventos_Context context)
+        private readonly Context _context;
+
+        public TiposEventosRepository(Context context)
         {
             _context = context;
         }
@@ -17,19 +18,19 @@ namespace EventPlus_.Repositories
         {
             try
             {
-                TiposEventos tipoEventoBuscado = _context.TiposEventos.Find(id)!;
+                TiposEventos tipoBuscado = _context.TiposEventos.Find(id)!;
 
-                if (tipoEventoBuscado != null)
+                if (tipoBuscado != null)
                 {
-                    tipoEventoBuscado.TituloTipoEvento = tipoEvento.TituloTipoEvento;
+                    tipoBuscado.TituloTipoEvento = tipoEvento.TituloTipoEvento;
                 }
 
-                _context.SaveChanges();
+                _context.TiposEventos.Update(tipoBuscado!);
 
+                _context.SaveChanges();
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -38,9 +39,7 @@ namespace EventPlus_.Repositories
         {
             try
             {
-                TiposEventos tipoEventoBuscado = _context.TiposEventos.Find(id)!;
-                return tipoEventoBuscado;
-
+                return _context.TiposEventos.Find(id)!;
             }
             catch (Exception)
             {
@@ -48,11 +47,13 @@ namespace EventPlus_.Repositories
             }
         }
 
-        public void Cadastrar(TiposEventos novoTipoEvento)
+        public void Cadastrar(TiposEventos tipoEvento)
         {
             try
             {
-                _context.TiposEventos.Add(novoTipoEvento);
+                tipoEvento.IdTipoEvento = Guid.NewGuid();
+
+                _context.TiposEventos.Add(tipoEvento);
 
                 _context.SaveChanges();
             }
@@ -66,18 +67,17 @@ namespace EventPlus_.Repositories
         {
             try
             {
-                TiposEventos tipoEventoBuscado = _context.TiposEventos.Find(id)!;
+                TiposEventos tipoBuscado = _context.TiposEventos.Find(id)!;
 
-                if (tipoEventoBuscado != null)
+                if (tipoBuscado != null)
                 {
-                    _context.TiposEventos.Remove(tipoEventoBuscado);
+                    _context.TiposEventos.Remove(tipoBuscado);
                 }
 
                 _context.SaveChanges();
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -86,9 +86,9 @@ namespace EventPlus_.Repositories
         {
             try
             {
-                List<TiposEventos> listaDeEventos = _context.TiposEventos.ToList();
-                return listaDeEventos;
-
+                return _context.TiposEventos
+                    .OrderBy(tp => tp.TituloTipoEvento)
+                    .ToList();
             }
             catch (Exception)
             {

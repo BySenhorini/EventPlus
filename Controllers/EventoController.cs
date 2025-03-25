@@ -11,9 +11,9 @@ namespace EventPlus_.Controller
     [Produces("application/json")]
     public class EventoController : ControllerBase
     {
-        private readonly IEventoRepository _eventoRepository;
+        private readonly IEventosRepository _eventoRepository;
 
-        public EventoController(IEventoRepository eventoRepository)
+        public EventoController(IEventosRepository eventoRepository)
         {
             _eventoRepository = eventoRepository;
         }

@@ -3,15 +3,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EventPlus_.Domains
 {
-    [Table("PresencasEventos")]
-    public class PresencasEventos
+    [Table("ComentariosEventos")]
+    public class ComentariosEventos
     {
         [Key]
-        public Guid IdPresencaEvento { get; set; }
+        public Guid IdComentarioEvento { get; set; }
+
+        [Column(TypeName = "VARCHAR(200)")]
+        [Required(ErrorMessage = "Descrição do comentário obrigatório!")]
+        public string? Descricao { get; set; }
 
         [Column(TypeName = "BIT")]
-        [Required(ErrorMessage = "Situação obrigatório!")]
-        public bool Situacao { get; set; }
+        [Required]
+        public bool Exibe { get; set; }
 
         //ref.tabela Usuario
         [Required(ErrorMessage = "Usuário obrigatório!")]
@@ -19,7 +23,6 @@ namespace EventPlus_.Domains
 
         [ForeignKey("IdUsuario")]
         public Usuarios? Usuario { get; set; }
-
 
         //ref.tabela Evento
         [Required(ErrorMessage = "Evento obrigatório!")]

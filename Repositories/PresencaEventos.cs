@@ -1,28 +1,38 @@
-﻿using EventPlus_.Context;
+﻿using EventPlus_.Contexts;
 using EventPlus_.Domains;
-using Events_PLUS.Interfaces;
+using EventPlus_.Interfaces;
 
 namespace EventPlus_.Repositories
 {
-    public class PresencasRepository : IPresencasRepository
+    public class PresencasEventosRepository : IPresencasEventosRepository
     {
-        private readonly Eventos_Context _context;
+        private readonly Context _context;
 
-        public PresencasRepository(Eventos_Context context)
+        public PresencasEventosRepository(Context context)
         {
             _context = context;
         }
-
-        public void Atualizar(Guid id, PresencasEventos presenca)
+        public void Atualizar(Guid id, PresencasEventos presencaEvento)
         {
             try
             {
-                PresencasEventos presencaBuscado = _context.PresencasEventos.Find(id)!;
+                PresencasEventos presencaEventoBuscado = _context.PresencasEventos.Find(id)!;
 
-                if (presencaBuscado != null)
+                if (presencaEventoBuscado != null)
                 {
-                    presencaBuscado.Situacao = presenca.Situacao;
+                    if (presencaEventoBuscado.Situacao)
+                    {
+                        presencaEventoBuscado.Situacao = false;
+                    }
+                    else
+                    {
+                        presencaEventoBuscado.Situacao = true;
+                    }
+
                 }
+
+                _context.PresencasEventos.Update(presencaEventoBuscado!);
+
                 _context.SaveChanges();
             }
             catch (Exception)
@@ -35,8 +45,27 @@ namespace EventPlus_.Repositories
         {
             try
             {
-                PresencasEventos presencaBuscado = _context.PresencasEventos.Find(id)!;
-                return presencaBuscado;
+                return _context.PresencasEventos
+                    .Select(p => new PresencasEventos
+                    {
+                        IdPresencaEvento = p.IdPresencaEvento,
+                        Situacao = p.Situacao,
+
+                        Evento = new Eventos
+                        {
+                            IdEvento = p.IdEvento!,
+                            DataEvento = p.Evento!.DataEvento,
+                            NomeEvento = p.Evento.NomeEvento,
+                            Descricao = p.Evento.Descricao,
+
+                            Instituicao = new Instituicoes
+                            {
+                                IdInstituicoes = p.Evento.Instituicao!.IdInstituicoes,
+                                NomeFantasia = p.Evento.Instituicao!.NomeFantasia
+                            }
+                        }
+
+                    }).FirstOrDefault(p => p.IdPresencaEvento == id)!;
             }
             catch (Exception)
             {
@@ -48,12 +77,13 @@ namespace EventPlus_.Repositories
         {
             try
             {
-                PresencasEventos presencaBuscado = _context.PresencasEventos.Find(id)!;
+                PresencasEventos presencaEventoBuscado = _context.PresencasEventos.Find(id)!;
 
-                if (presencaBuscado != null)
+                if (presencaEventoBuscado != null)
                 {
-                    _context.PresencasEventos.Remove(presencaBuscado);
+                    _context.PresencasEventos.Remove(presencaEventoBuscado);
                 }
+
                 _context.SaveChanges();
             }
             catch (Exception)
@@ -62,11 +92,14 @@ namespace EventPlus_.Repositories
             }
         }
 
-        public void Inscrever(PresencasEventos inscreverPresenca)
+        public void Inscrever(PresencasEventos inscricao)
         {
             try
             {
-                _context.PresencasEventos.Add(inscreverPresenca);
+                inscricao.IdPresencaEvento = Guid.NewGuid();
+
+                _context.PresencasEventos.Add(inscricao);
+
                 _context.SaveChanges();
             }
             catch (Exception)
@@ -77,10 +110,30 @@ namespace EventPlus_.Repositories
 
         public List<PresencasEventos> Listar()
         {
+
             try
             {
-                List<PresencasEventos> listaPresenca = _context.PresencasEventos.ToList();
-                return listaPresenca;
+                return _context.PresencasEventos
+                    .Select(p => new PresencasEventos
+                    {
+                        IdPresencaEvento = p.IdPresencaEvento,
+                        Situacao = p.Situacao,
+
+                        Evento = new Eventos
+                        {
+                            IdEvento = p.IdEvento,
+                            DataEvento = p.Evento!.DataEvento,
+                            NomeEvento = p.Evento.NomeEvento,
+                            Descricao = p.Evento.Descricao,
+
+                            Instituicao = new Instituicoes
+                            {
+                                IdInstituicoes = p.Evento.Instituicao!.IdInstituicoes,
+                                NomeFantasia = p.Evento.Instituicao!.NomeFantasia
+                            }
+                        }
+
+                    }).ToList();
             }
             catch (Exception)
             {
@@ -88,17 +141,31 @@ namespace EventPlus_.Repositories
             }
         }
 
-        public List<PresencasEventos> ListarMinhasPresencas(Guid id)
+        public List<PresencasEventos> ListarMinhas(Guid id)
         {
-            try
-            {
-                List<PresencasEventos> listaPresenca = _context.PresencasEventos.Where(p => p.UsuarioID == id).ToList();
-                return listaPresenca;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _context.PresencasEventos
+                .Select(p => new PresencasEventos
+                {
+                    IdPresencaEvento = p.IdPresencaEvento,
+                    Situacao = p.Situacao,
+                    IdUsuario = p.IdUsuario,
+                    IdEvento = p.IdEvento,
+
+                    Evento = new Eventos
+                    {
+                        IdEvento = p.IdEvento,
+                        DataEvento = p.Evento!.DataEvento,
+                        NomeEvento = p.Evento!.NomeEvento,
+                        Descricao = p.Evento!.Descricao,
+
+                        Instituicao = new Instituicoes
+                        {
+                            IdInstituicoes = p.Evento!.IdInstituicoes,
+                        }
+                    }
+                })
+                .Where(p => p.IdUsuario == id)
+                .ToList();
         }
     }
 }

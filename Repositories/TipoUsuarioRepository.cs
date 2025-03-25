@@ -1,47 +1,64 @@
-﻿using EventPlus_.Context;
+﻿using EventPlus_.Contexts;
+using EventPlus_.Domains;
 using EventPlus_.Interfaces;
-using Events_PLUS.Domains;
+
 
 namespace EventPlus_.Repositories
 {
-    public class TipoUsuarioRepository : ITipoUsuarioRepository
+    public class TiposUsuariosRepository : ITiposUsuariosRepository
     {
-        private readonly Eventos_Context _Context;
+        private readonly Context _context;
+
+        public TiposUsuariosRepository(Context context)
+        {
+            _context = context;
+        }
+
         public void Atualizar(Guid id, TiposUsuarios tipoUsuario)
         {
             try
             {
-                TiposUsuarios tipoUsuarioBuscado = _Context.TiposUsuarios.Find(id)!;
-                if (tipoUsuarioBuscado != null)
+                TiposUsuarios tipoBuscado = _context.TiposUsuarios.Find(id)!;
+
+                if (tipoBuscado != null)
                 {
-                    tipoUsuarioBuscado.TituloTipoUsuario = tipoUsuario.TituloTipoUsuario;
+                    tipoBuscado.TituloTipoUsuario = tipoUsuario.TituloTipoUsuario;
                 }
-                _Context.SaveChanges();
+
+                _context.TiposUsuarios.Update(tipoBuscado!);
+
+                _context.SaveChanges();
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
         public TiposUsuarios BuscarPorId(Guid id)
         {
-            TiposUsuarios tipoUsuarioBuscado = _Context.TiposUsuarios.Find(id)!;
-            return tipoUsuarioBuscado;
-        }
-
-        public void Cadastrar(TiposUsuarios novoTipoUsuario)
-        {
             try
             {
-                _Context.TiposUsuarios.Add(novoTipoUsuario);
-
-                _Context.SaveChanges();
+                return _context.TiposUsuarios.Find(id)!;
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
 
+        public void Cadastrar(TiposUsuarios tipoUsuario)
+        {
+            try
+            {
+                tipoUsuario.IdTipoUsuario = Guid.NewGuid();
+
+                _context.TiposUsuarios.Add(tipoUsuario);
+
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -50,24 +67,31 @@ namespace EventPlus_.Repositories
         {
             try
             {
-                TiposUsuarios tipoUsuarioBuscado = _Context.TiposUsuarios.Find(id)!;
-                if (tipoUsuarioBuscado != null)
+                TiposUsuarios tipoBuscado = _context.TiposUsuarios.Find(id)!;
+
+                if (tipoBuscado != null)
                 {
-                    _Context.TiposUsuarios.Remove(tipoUsuarioBuscado);
-                    _Context.SaveChanges();
+                    _context.TiposUsuarios.Remove(tipoBuscado);
                 }
+
+                _context.SaveChanges();
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
         public List<TiposUsuarios> Listar()
         {
-            List<TiposUsuarios> listaTipoUsuario = _Context.TiposUsuarios.ToList();
-            return listaTipoUsuario;
+            try
+            {
+                return _context.TiposUsuarios.ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

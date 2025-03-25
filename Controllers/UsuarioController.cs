@@ -2,9 +2,9 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Events_PLUS.Domains;
 using Projeto_Event_Plus.DTO;
-using Events_PLUS_.Interfaces;
+using EventPlus_.Interfaces;
+using EventPlus_.Domains;
 
 namespace Projeto_Event_Plus.Controllers
 {

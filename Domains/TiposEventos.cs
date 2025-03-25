@@ -7,11 +7,10 @@ namespace EventPlus_.Domains
     public class TiposEventos
     {
         [Key]
-        public Guid TiposEventosID { get; set; }
+        public Guid IdTipoEvento { get; set; }
 
-        [Column(TypeName = "VARCHAR(50)")]
-        [Required(ErrorMessage = "O titulo do tipo evento é obrigatório!")]
+        [Column(TypeName = "VARCHAR(100)")]
+        [Required(ErrorMessage = "Nome do evento obrigatório!")]
         public string? TituloTipoEvento { get; set; }
-
     }
 }

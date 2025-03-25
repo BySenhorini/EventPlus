@@ -1,5 +1,5 @@
 ﻿using EventPlus_.Domains;
-using Events_PLUS.Interfaces;
+using EventPlus_.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +10,9 @@ namespace EventPlus_.Controller
     [Produces("application/json")]
     public class PresencaController : ControllerBase
     {
-        private readonly IPresencasRepository _presencaRepository;
+        private readonly IPresencasEventosRepository _presencaRepository;
 
-        public PresencaController(IPresencasRepository presencaRepository)
+        public PresencaController(IPresencasEventosRepository presencaRepository)
         {
             _presencaRepository = presencaRepository;
         }

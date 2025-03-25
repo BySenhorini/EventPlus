@@ -1,14 +1,13 @@
-﻿using Events_PLUS.Domains;
+﻿using EventPlus_.Domains;
 
-namespace Events_PLUS_.Interfaces
+namespace EventPlus_.Interfaces
 {
     public interface IUsuarioRepository
     {
-        void Cadastrar(Usuarios novoUsuario);
+        void Cadastrar(Usuarios usuario);
 
         Usuarios BuscarPorId(Guid id);
 
         Usuarios BuscarPorEmailESenha(string email, string senha);
-
     }
 }
